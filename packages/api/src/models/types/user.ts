@@ -1,21 +1,15 @@
 // our DB type
 export type User = {
   id: string;
-  nom: string;
-  prenom: string;
-  id_genre: number;
+  api_key: string;
   email: string;
   password: string;
-  abonnement: boolean;
 };
 
 // our type after we run through Humps
 export type UserCamel = {
   id: string;
-  nom: string;
-  prenom: string;
-  idGenre: number;
+  apiKey: string;
   email: string;
   password: string;
-  abonnement: boolean;
 };

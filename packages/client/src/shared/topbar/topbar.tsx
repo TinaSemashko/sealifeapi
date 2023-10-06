@@ -97,20 +97,10 @@ const TopBar: React.FC = () => {
     <Box
       sx={{
         display: "flex",
-        backgroundColor:
-          pathname === Routes.profil ? "primary.main" : "transparent",
       }}
     >
       <CssBaseline />
-      <AppBar
-        component="nav"
-        position="absolute"
-        sx={{
-          backgroundColor:
-            pathname === Routes.profil ? "primary.main" : "transparent",
-          boxShadow: "none",
-        }}
-      >
+      <AppBar component="nav" position="absolute">
         <Toolbar
           sx={{
             display: "flex",
@@ -152,24 +142,17 @@ const TopBar: React.FC = () => {
                     color: "colorWhite.main",
                     textTransform: "capitalize",
                     "&.Mui-selected": {
-                      color:
-                        item === MenuItems.INSCRIPTION
-                          ? "colorWhite.main"
-                          : "secondary.main",
-                      backgroundColor:
-                        item === MenuItems.INSCRIPTION
-                          ? "secondary.main"
-                          : "transparent",
-                      borderRadius:
-                        item === MenuItems.INSCRIPTION ? "10px" : "0",
-                      boxShadow:
-                        item === MenuItems.INSCRIPTION
-                          ? " 0px 4px 4px #2e4f44 "
-                          : "transparent",
+                      color: "colorWhite.main",
+                      backgroundColor: "secondary.main",
+                      boxShadow: " 0px 4px 4px #2e4f44 ",
                     },
                   }}
                 >
-                  {item === MenuItems.HOME ? "accueil" : item}
+                  {item === MenuItems.HOME
+                    ? "accueil"
+                    : item === MenuItems.API
+                    ? "API REST"
+                    : item}
                 </ListItemButton>
               </ListItem>
             ))}

@@ -3,7 +3,7 @@ import { knex as db } from "./db";
 import {
   getAllUsers,
   getProfile,
-  updateUserAbonnement,
+  getUserById,
   createNewUser,
 } from "./src/controllers/user";
 import * as userModel from "./src/models/user";
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 
 router.get("/user", getProfile(userModel));
 router.get("/users", getAllUsers(userModel));
-router.put("/abonnement", updateUserAbonnement(userModel));
+router.get("/getuserbyid", getUserById(userModel));
 router.post("/create", createNewUser(userModel));
 
 export default router;
