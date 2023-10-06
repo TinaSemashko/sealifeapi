@@ -37,7 +37,6 @@ export const getUserById =
       return res.status(404).send({ message: "User doesn't existe" });
     }
 
-    console.log([user]);
     res.send({ results: [user] });
   };
 
