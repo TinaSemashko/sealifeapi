@@ -27,16 +27,18 @@ export const getAllUsers =
     res.send({ results: [user] });
   };
 
-export const updateUserAbonnement =
+export const getUserById =
   (model: User) => async (req: Request, res: Response) => {
-    const { email } = req.body;
-    const userId = await model.putUserAbonnement(email as string);
+    const { id } = req.query;
 
-    if (!userId) {
+    const user = await model.getUserById(id as string);
+
+    if (!user) {
       return res.status(404).send({ message: "User doesn't existe" });
     }
 
-    res.send({ results: [userId] });
+    console.log([user]);
+    res.send({ results: [user] });
   };
 
 export const createNewUser =

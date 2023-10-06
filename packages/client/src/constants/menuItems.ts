@@ -1,7 +1,6 @@
 export enum MenuItems {
   HOME = "home",
-  profil = "profil",
-  CONTACT = "contact",
+  EXAMPLE = "example",
   CONNECTION = "connection",
-  INSCRIPTION = "inscription",
+  API = "apirest",
 }

@@ -26,12 +26,12 @@ export const getUser = async (email: string, password: string) => {
   return null;
 };
 
-export const putUserAbonnement = async (email: string) => {
-  const results = await knex<User>(table)
-    .update({ abonnement: true })
-    .where({ email });
+export const getUserById = async (id: string) => {
+  const results = await knex(table).select("*").where({ id });
 
-  if (results) return results;
+  if (results && results.length) {
+    return results[0];
+  }
 
   return null;
 };
