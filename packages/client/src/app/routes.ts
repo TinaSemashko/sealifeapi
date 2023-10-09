@@ -1,7 +1,7 @@
 export enum Routes {
   home = "/",
   example = "/example",
-  // contact = "/contact",
+  apirest = "/apirest",
   // connection = "/connection",
   // deconnection = "/deconnection",
   // inscription = "/inscription",
