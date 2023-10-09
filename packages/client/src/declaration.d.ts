@@ -3,3 +3,6 @@ declare module "*.svg";
 declare module "*.jpeg";
 declare module "*.jpg";
 declare module "*.mp4";
+
+declare module "react-syntax-highlighter";
+declare module "react-syntax-highlighter/dist/esm/styles/hljs";

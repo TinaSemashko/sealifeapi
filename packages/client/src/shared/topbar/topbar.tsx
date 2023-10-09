@@ -150,7 +150,7 @@ const TopBar: React.FC = () => {
                 >
                   {item === MenuItems.HOME
                     ? "accueil"
-                    : item === MenuItems.API
+                    : item === MenuItems.APIREST
                     ? "API REST"
                     : item}
                 </ListItemButton>
