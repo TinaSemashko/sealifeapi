@@ -13,7 +13,7 @@ const Home = lazy(() => import("../pages/home"));
 const Example = lazy(() => import("../pages/example"));
 const Apirest = lazy(() => import("../pages/apirest"));
 // const Connection = lazy(() => import("../pages/connection"));
-// const Inscription = lazy(() => import("../pages/inscription"));
+ const form = lazy(() => import("../pages/form"));
 
 export const AppRoutes: React.FunctionComponent = () => (
   <Router>

@@ -27,10 +27,11 @@ export const getUser = async (email: string, password: string) => {
 };
 
 export const getUserById = async (id: string) => {
-  const results = await knex(table).select("*").where({ id });
-
+  console.log("model");
+  const results = await knex<User>(table).select("*").where({ id });
+  console.log(results);
   if (results && results.length) {
-    return results[0];
+    humps.camelizeKeys(results[0]) as UserCamel;
   }
 
   return null;

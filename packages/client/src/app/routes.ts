@@ -4,5 +4,5 @@ export enum Routes {
   apirest = "/apirest",
   // connection = "/connection",
   // deconnection = "/deconnection",
-  // inscription = "/inscription",
+   form = "/form",
 }

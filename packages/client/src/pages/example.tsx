@@ -16,7 +16,7 @@ const Example: React.FC = () => {
   const fetchGet = async () => {
     const request = {
       params: {
-        id: "1",
+        id: 1,
       },
     };
     await axios

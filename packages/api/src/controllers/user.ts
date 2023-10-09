@@ -29,6 +29,7 @@ export const getAllUsers =
 
 export const getUserById =
   (model: User) => async (req: Request, res: Response) => {
+    console.log(req.query);
     const { id } = req.query;
 
     const user = await model.getUserById(id as string);
