@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Button from "@mui/material/Button";
 import Grid from "@mui/system/Unstable_Grid";
 import Box from "@mui/system/Box";
 import TextField from "@mui/material/TextField";
-// import Typography from "@mui/material/Typography";
+import Typography from "@mui/material/Typography";
 // import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -29,7 +31,7 @@ const FormConnexion: React.FC = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [dataUrl, setDataUrl] = useState("");
   const userIdCourant = localStorage.getItem("usrCourant");
-
+  const [newUserId, setNewUserId] = useState(0);
   const [validationEmail, setValidationEmail] = useState({
     valid: false,
     messages: [],
@@ -104,6 +106,22 @@ const FormConnexion: React.FC = () => {
     }
   };
 
+  const fetchPost = async () => {
+    const params = {
+      data: user,
+    };
+    await axios
+      .post("create", params)
+      .then((response) => setNewUserId(response.data.results))
+      .catch((err) => {
+        showError(err);
+      });
+  };
+
+  const createUser = () => {
+    fetchPost();
+  };
+
   useEffect(() => {
     if (userdata) {
       setUserEmail(userdata.email);
@@ -138,9 +156,10 @@ const FormConnexion: React.FC = () => {
 
   return (
     <S.CContainer>
-      <Box sx={{ width: "70%" }}>
+      <Box sx={{ width: "70%" }} border={4} borderRadius={3}>
+        <Typography>Connexion</Typography>
         <Grid container rowSpacing={0} columnSpacing={0}>
-          <Grid xs={12} md={6}>
+          <Grid xs={12} md={12}>
             <S.Item>
               <ValidationGroup>
                 <>
@@ -150,7 +169,7 @@ const FormConnexion: React.FC = () => {
                       sx={{
                         "& .MuiTextField-root": {
                           m: 1,
-                          width: { sm: "30vw", md: "25vw", lg: "15vw" },
+                          width: { sm: "100vw", md: "50vw", lg: "25vw" },
                           borderRadius: "10px",
                         },
                       }}
@@ -181,7 +200,7 @@ const FormConnexion: React.FC = () => {
                               sx={{
                                 backgroundColor: " grey",
                                 boxShadow: " 0px 8px 8px #566573  inset",
-                                width: { sm: "30vw", md: "25vw", lg: "15vw" },
+                                width: { sm: "100vw", md: "50vw", lg: "25vw" },
                               }}
                             />
                           </Validate>
@@ -194,7 +213,7 @@ const FormConnexion: React.FC = () => {
                             <FormControl
                               sx={{
                                 m: 1,
-                                width: { sm: "30vw", md: "25vw", lg: "15vw" },
+                                width: { sm: "100vw", md: "50vw", lg: "25vw" },
                                 borderRadius: "10px",
                               }}
                               variant="outlined"
@@ -222,9 +241,9 @@ const FormConnexion: React.FC = () => {
                                     boxShadow: " 0px 8px 8px #566573  inset",
                                     borderRadius: "10px",
                                     width: {
-                                      sm: "30vw",
-                                      md: "25vw",
-                                      lg: "15vw",
+                                      sm: "100vw",
+                                      md: "50vw",
+                                      lg: "25vw",
                                     },
                                   }}
                                   endAdornment={
@@ -251,14 +270,28 @@ const FormConnexion: React.FC = () => {
                           </Box>
                         </S.InputContainer>
 
-                        <S.ButtonLogin
-                          isinscrit={isInscrit}
+                        <ButtonGroup
+                          disableElevation
                           variant="contained"
-                          size="medium"
-                          onClick={() => getUser()}
+                          aria-label="Disabled elevation buttons"
                         >
-                          {isInscrit ? "LOG OUT" : "LOG IN"}
-                        </S.ButtonLogin>
+                          <S.ButtonLogin
+                            isinscrit={isInscrit}
+                            variant="contained"
+                            size="medium"
+                            onClick={() => getUser()}
+                          >
+                            {isInscrit ? "LOG OUT" : "LOG IN"}
+                          </S.ButtonLogin>
+                          <S.ButtonLogin
+                            isinscrit={isInscrit}
+                            variant="contained"
+                            size="medium"
+                            onClick={() => createUser()}
+                          >
+                            Sign UP
+                          </S.ButtonLogin>
+                        </ButtonGroup>
                       </S.FlexContainer>
                     </Box>
                   </S.FormContainer>

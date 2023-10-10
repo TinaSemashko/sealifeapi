@@ -11,7 +11,7 @@ import * as bateauModel from "./src/models/bateau";
 import authorization from "./src/middleware/authorisation";
 
 const router = Router();
-router.use(authorization);
+// router.use(authorization);
 router.get("/", (req, res) => {});
 
 router.get("/user", getProfile(userModel));

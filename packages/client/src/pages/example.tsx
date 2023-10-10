@@ -1,48 +1,44 @@
 import { Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
 import axios from "../axios";
 import * as S from "./example.styled";
 import { useEffect, useState } from "react";
 
-interface User {
-  id: number;
-  email: string;
-  password: string;
-  api_key: string;
-}
+
 
 const Example: React.FC = () => {
-  const [userdata, setUserdata] = useState<User>();
-
-  const fetchGet = async () => {
-    const request = {
-      params: {
-        id: 1,
-      },
-    };
-    await axios
-      .get(`getuserbyid`, request)
-      .then((response) => {
-        setUserdata(response.data.results[0] as User);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  useEffect(() => {
-    fetchGet();
-  }, []);
+ 
+  
 
   return (
     <S.MainContainer>
       <S.Cont>
-        <Typography variant="h2">Page Example</Typography>
-        <Typography variant="h4">
-          <div>{userdata?.id}</div>
-          <div> {userdata?.email}</div>
-          <div> {userdata?.password}</div>
-          <div> {userdata?.api_key}</div>
-        </Typography>
+        <Typography variant="h2">Page exemple API</Typography>
+        <S.Search>
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 400,
+              border: 3,
+              borderRadius: 2,
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="boat"
+              inputProps={{ "aria-label": "boat" }}
+            />
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </S.Search>
       </S.Cont>
     </S.MainContainer>
   );

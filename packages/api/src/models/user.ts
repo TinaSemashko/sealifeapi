@@ -27,19 +27,18 @@ export const getUser = async (email: string, password: string) => {
 };
 
 export const getUserById = async (id: string) => {
-  console.log("model");
   const results = await knex<User>(table).select("*").where({ id });
-  console.log(results);
+
   if (results && results.length) {
-    humps.camelizeKeys(results[0]) as UserCamel;
+    return results[0];
   }
 
   return null;
 };
 
-export const createUser = async (data: UserCamel) => {
+export const createUser = async (data: User) => {
   const results: number[] = await knex<User>(table)
-    .insert(humps.decamelizeKeys({ ...data }))
+    .insert({ ...data })
     .returning("id");
 
   return results[0];
