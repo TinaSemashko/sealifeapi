@@ -14,14 +14,14 @@ import {
   ListItemButton,
   Typography,
 } from "@mui/material";
-
+import { MenuItems } from "../../constants/menuItems";
+import { MenuItemsMap } from "../../constants/menuitemsobjet";
 import { useLocation, useNavigate } from "react-router";
 import { Routes } from "../../app/routes";
 
 import CloseIcon from "@mui/icons-material/Close";
 
 import * as S from "./topbar.styled";
-import { MenuItems } from "../../constants/menuItems";
 
 const menuItemsArray = Object.values(MenuItems);
 
@@ -148,11 +148,7 @@ const TopBar: React.FC = () => {
                     },
                   }}
                 >
-                  {item === MenuItems.HOME
-                    ? "accueil"
-                    : item === MenuItems.APIREST
-                    ? "API REST"
-                    : item}
+                  {MenuItemsMap[item]}
                 </ListItemButton>
               </ListItem>
             ))}
