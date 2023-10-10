@@ -2,7 +2,7 @@ import * as S from "./footer.styled";
 
 const Home: React.FC = () => {
   return (
-    <S.MainContainer>© 2023 Connectify. Tous Droits Réservés.</S.MainContainer>
+    <S.MainContainer>© 2023 XT Studio. Tous Droits Réservés.</S.MainContainer>
   );
 };
 

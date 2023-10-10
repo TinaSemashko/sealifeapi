@@ -43,7 +43,7 @@ const TopBar: React.FC = () => {
       onClick={handleDrawerToggle}
       sx={{
         textAlign: "center",
-        backgroundColor: "lightGreen.main",
+        backgroundColor: "primary.main",
         height: "100%",
       }}
     >
