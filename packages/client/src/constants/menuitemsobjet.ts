@@ -9,4 +9,5 @@ export const MenuItemsMap: ItemsMap = {
   [MenuItems.CONNECTION]: "Connexion",
   [MenuItems.EXAMPLE]: "Exemple",
   [MenuItems.HOME]: "Accueil",
+  [MenuItems.ADMIN]: "Admin page",
 };

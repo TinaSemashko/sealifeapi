@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 export const MainContainer = styled("div")`
   display: grid;
   grid-template-columns: 40% 60%;
-  min-height: 100vh;
+  min-height: 90vh;
 `;
 
 export const Title = styled("div")`

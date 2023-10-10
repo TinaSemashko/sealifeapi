@@ -1,10 +1,11 @@
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-
 export const CContainer = styled("div")`
   width: 100%;
   padding-top: 10rem;
+  min-height: 90vh;
+  text-align: center;
 
   @media (max-width: 750px) {
     display: flex;
@@ -14,22 +15,13 @@ export const CContainer = styled("div")`
   }
 `;
 
-export const Item = styled("div")`
-  text-align: "center";
-
-  @media (max-width: 750px) {
-    width: 100vw;
-    height: 100%;
-  }
-`;
-
 export const FormContainer = styled("div")`
   padding-top: 17vh;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   justify-content: space-evenly;
-  height: 10vh;
+  height: 20vh;
   padding-bottom: 10vh;
   color: ${({ theme }) => theme.palette.colorWhite.main};
 
@@ -54,6 +46,7 @@ export const FlexContainer = styled("div")`
 
 export const InputContainer = styled("div")<{ isinscrit: boolean }>`
   display: ${({ isinscrit }) => (isinscrit ? "none" : "block")};
+  padding-top: 15vh;
 `;
 
 export const Inscrivez = styled("div")`
@@ -72,21 +65,22 @@ export const Form = styled("div")`
   padding-bottom: 5%;
 `;
 
-
-
 export const ButtonLogin = styled(Button)<{ isinscrit: boolean }>`
-  margin:  1vw;
-  background-color: ${({ isinscrit,theme }) => (isinscrit ? "transparent" : theme.palette.secondary.main)};
+  margin: 1vw;
+  background-color: ${({ isinscrit, theme }) =>
+    isinscrit ? "transparent" : theme.palette.secondary.main};
   border: solid black;
   width: 15vw;
   min-width: 15vw;
   border-radius: 20px;
   color: ${({ theme }) => theme.palette.primary.main};
 
-@media (max-width: 750px) {
-   width: 30vw;
+  @media (max-width: 750px) {
+    width: 30vw;
   }
-
 `;
 
-
+export const UserData = styled("div")<{ isinscrit: boolean }>`
+  display: ${({ isinscrit }) => (isinscrit ? "block" : "none")};
+  color: black;
+`;

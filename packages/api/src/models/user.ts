@@ -1,6 +1,6 @@
 import humps from "humps";
 import { knex } from "../../db";
-import { User, UserCamel } from "./types/user";
+import { User } from "./types/user";
 
 export const table = "users";
 
@@ -20,7 +20,7 @@ export const getUser = async (email: string, password: string) => {
     .where({ email, password });
 
   if (results && results.length) {
-    return humps.camelizeKeys(results[0]) as UserCamel;
+    return results[0] as User;
   }
 
   return null;
@@ -37,16 +37,36 @@ export const getUserById = async (id: string) => {
 };
 
 export const putUserById = async (id: string, data: User) => {
-  const results = await knex<User>(table)
-    .update({ email: data.email, api_key: data.api_key })
-    .where({ id });
+  const existingUser = await knex<User>(table)
+    .select("*")
+    .where({ id })
+    .first();
+
+  if (!existingUser) {
+    return null;
+  }
+  const updatedFields: Partial<User> = {};
+
+  if (data.email !== existingUser.email && data.email !== "") {
+    updatedFields.email = data.email;
+  }
+
+  if (data.api_key !== existingUser.api_key && data.api_key !== "") {
+    updatedFields.api_key = data.api_key;
+  }
+
+  if (Object.keys(updatedFields).length === 0) {
+    return null;
+  }
+
+  const results = await knex<User>(table).update(updatedFields).where({ id });
 
   if (results) return results;
 
   return null;
 };
 
-export const createUser = async (data: UserCamel) => {
+export const createUser = async (data: User) => {
   const results: number[] = await knex<User>(table)
     .insert({ ...data })
     .returning("id");
