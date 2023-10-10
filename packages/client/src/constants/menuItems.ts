@@ -3,4 +3,5 @@ export enum MenuItems {
   EXAMPLE = "example",
   CONNECTION = "form",
   APIREST = "apirest",
+  ADMIN = "admin",
 }
