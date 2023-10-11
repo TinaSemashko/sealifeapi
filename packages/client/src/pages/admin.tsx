@@ -2,6 +2,8 @@ import { Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "../axios";
 import { AdminAPIKey } from "../config";
+import { useNavigate } from "react-router";
+import { Routes } from "../app/routes";
 
 import * as S from "./admin.styled";
 
@@ -13,8 +15,13 @@ interface User {
 }
 
 const Admin: React.FC = () => {
+  const navigate = useNavigate();
+
   const [userdata, setUserdata] = useState<User[]>([]);
   const [disabledId, setDisabledId] = useState("");
+  const [editedData, setEditedData] = useState<{
+    [key: string]: { email: string };
+  }>({});
   const [user, setUser] = useState<User>({
     id: 0,
     email: "",
@@ -22,17 +29,23 @@ const Admin: React.FC = () => {
     api_key: "",
   });
   const [userId, setUserId] = useState(0);
-  // const [email, setEmail] = useState("");
-  const { email, password, api_key } = user;
-  console.log(user);
 
   const onInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    itemId: number
   ) => {
     setUser({
       ...user,
       [event.target?.name]: event.target?.value,
     });
+
+    setEditedData((prevData) => ({
+      ...prevData,
+      [itemId]: {
+        ...prevData[itemId],
+        [event.target?.name]: event.target?.value,
+      },
+    }));
   };
 
   const fetchGet = async () => {
@@ -54,10 +67,6 @@ const Admin: React.FC = () => {
   useEffect(() => {
     fetchGet();
   }, []);
-
-  //  useEffect(() => {
-  //    userdata? setUser(userdata): "";
-  //  }, []);
 
   const fetchDelete = async (id: number) => {
     const request = {
@@ -81,21 +90,18 @@ const Admin: React.FC = () => {
   };
 
   const fetchPut = async (id: string) => {
-    const request = {
+    const params = {
+      data: user,
+    };
+    const headers = {
       params: {
         id: id,
         api_key: AdminAPIKey,
-        data: user,
       },
     };
     await axios
-      // .put(`update`, request)
-      .put(
-        `http://localhost:4000/api/update?api_key=${AdminAPIKey}&id=${id.toString()}&data=${user}`
-      )
-      .then((response) => {
-        console.log(response.data.results);
-      })
+      .put("update", params, headers)
+      .then((response) => console.log(response.data.results))
       .catch((err) => {
         console.error(err);
       });
@@ -104,26 +110,19 @@ const Admin: React.FC = () => {
   const handlePut = (id: string) => {
     if (disabledId === "") setDisabledId(id);
     else {
+      console.log(user);
+      setUser({
+        ...user,
+        email: editedData[id].email,
+      });
+
       fetchPut(id);
       setDisabledId("");
     }
   };
 
-  const fetchPost = async () => {
-    const request = {
-      data: user,
-      api_key: AdminAPIKey,
-    };
-    await axios
-      .post(`create`, request)
-      .then((response) => setUserId(response.data.results))
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
   const addUser = async () => {
-    fetchPost();
+    navigate(Routes.form);
   };
 
   return (
@@ -152,9 +151,9 @@ const Admin: React.FC = () => {
               type="text"
               fullWidth
               name="email"
-              value={email ? email : item?.email}
+              value={editedData[item.id]?.email || item?.email}
               disabled={disabledId === item?.id.toString() ? false : true}
-              onChange={(e) => onInputChange(e)}
+              onChange={(e) => onInputChange(e, item?.id)}
             />
           </S.TextFieldContainer>
           <div>{item?.api_key}</div>

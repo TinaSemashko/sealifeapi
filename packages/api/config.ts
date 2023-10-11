@@ -4,3 +4,8 @@ export const dbConnection =
 
 export const dbPoolMin = parseInt(process.env.DB_POOL_MIN || "", 10) || 2;
 export const dbPoolMax = parseInt(process.env.DB_POOL_MAX || "", 10) || 30;
+
+export const AdminAPIKey = process.env.REACT_APP_ADMIN_API_KEY?.replace(
+  /['"]+/g,
+  ""
+).replace(";", "");

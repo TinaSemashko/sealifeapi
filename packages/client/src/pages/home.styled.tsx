@@ -5,6 +5,7 @@ export const MainContainer = styled("div")`
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   justify-items: center;
+  min-height: 90vh;
 
   video {
     grid-column: 1;

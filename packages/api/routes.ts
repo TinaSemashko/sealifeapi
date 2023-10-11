@@ -18,24 +18,24 @@ import {
 } from "./src/controllers/review";
 import * as reviewModel from "./src/models/review";
 import authorization from "./src/middleware/authorisation";
+import authorizationAdmin from "./src/middleware/authorisation";
 
 const router = Router();
 // router.use(authorization);
-router.get("/", (req, res) => {});
 
 router.get("/user", getProfile(userModel));
-router.get("/users", getAllUsers(userModel));
+router.get("/users", authorizationAdmin, getAllUsers(userModel));
 router.get("/getuserbyid", getUserById(userModel));
 router.post("/create", createNewUser(userModel));
-router.put("/update", updateUserById(userModel));
-router.delete("/delete", removeUser(userModel));
+router.put("/update", authorizationAdmin, updateUserById(userModel));
+router.delete("/delete", authorizationAdmin, removeUser(userModel));
 
-router.get("/bateaux", getALLBateaux(bateauModel));
-router.get("/bateauxbytype", getBateauByTypeModel(bateauModel));
+router.get("/bateaux", authorization, getALLBateaux(bateauModel));
+router.get("/bateauxbytype", authorization, getBateauByTypeModel(bateauModel));
 
-router.get("/reviews", getReviews(reviewModel));
-router.get("/getreviewsbyid", getReviewByModel(reviewModel));
-router.post("/createreview", createNewReview(reviewModel));
-router.delete("/deletereviw", removeReviewById(reviewModel));
+router.get("/reviews", authorization, getReviews(reviewModel));
+router.get("/getreviewsbyid", authorization, getReviewByModel(reviewModel));
+router.post("/createreview", authorization, createNewReview(reviewModel));
+router.delete("/deletereviw", authorization, removeReviewById(reviewModel));
 
 export default router;

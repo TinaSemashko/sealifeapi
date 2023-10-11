@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
@@ -18,8 +18,9 @@ import { MenuItems } from "../../constants/menuItems";
 import { MenuItemsMap } from "../../constants/menuitemsobjet";
 import { useLocation, useNavigate } from "react-router";
 import { Routes } from "../../app/routes";
-
 import CloseIcon from "@mui/icons-material/Close";
+import axios from "../../axios";
+import { AdminAPIKey } from "../../config";
 
 import * as S from "./topbar.styled";
 
@@ -31,12 +32,36 @@ const TopBar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
+  const userIdCourant = localStorage.getItem("usrCourant");
   const isSelected = (item: string): boolean => pathname.includes(item);
+  const [userAPIKey, setUserAPIKey] = useState("");
+  const isAdmin = userAPIKey === AdminAPIKey;
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const fetchGetUserById = async () => {
+    const request = {
+      params: {
+        id: userIdCourant,
+      },
+    };
+    await axios
+      .get(`getuserbyid`, request)
+      .then((response) => {
+        setUserAPIKey(response.data.results[0].api_key);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    if (userIdCourant !== undefined && userIdCourant !== "" && !userAPIKey) {
+      fetchGetUserById();
+    }
+  }, [userIdCourant]);
 
   const drawer = (
     <Box
@@ -148,7 +173,10 @@ const TopBar: React.FC = () => {
                     },
                   }}
                 >
-                  {MenuItemsMap[item]}
+                  {(isAdmin && MenuItemsMap[item] === MenuItemsMap.admin) ||
+                  MenuItemsMap[item] !== MenuItemsMap.admin
+                    ? MenuItemsMap[item]
+                    : ""}
                 </ListItemButton>
               </ListItem>
             ))}
