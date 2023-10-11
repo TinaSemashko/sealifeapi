@@ -1,5 +1,6 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
 import axios from "../axios";
 import { AdminAPIKey } from "../config";
 import { useNavigate } from "react-router";
@@ -16,11 +17,11 @@ interface User {
 
 const Admin: React.FC = () => {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar } = useSnackbar();
   const [userdata, setUserdata] = useState<User[]>([]);
   const [disabledId, setDisabledId] = useState("");
   const [editedData, setEditedData] = useState<{
-    [key: string]: { email: string };
+    [key: string]: { email: string; api_key: string };
   }>({});
   const [user, setUser] = useState<User>({
     id: 0,
@@ -101,22 +102,33 @@ const Admin: React.FC = () => {
     };
     await axios
       .put("update", params, headers)
-      .then((response) => console.log(response.data.results))
+      .then((response) => setUserId(response.data.results[0].id))
       .catch((err) => {
         console.error(err);
       });
   };
 
+  useEffect(() => {
+    if (userId)
+      enqueueSnackbar("L'utilisateur est modifié avec succès", {
+        variant: "success",
+      });
+  }, [userId]);
+
   const handlePut = (id: string) => {
     if (disabledId === "") setDisabledId(id);
     else {
-      console.log(user);
-      setUser({
-        ...user,
-        email: editedData[id].email,
-      });
-
-      fetchPut(id);
+      if (editedData.lenght) {
+        setUser({
+          ...user,
+          email: editedData[id].email,
+          api_key: editedData[id].api_key,
+        });
+        fetchPut(id);
+      } else
+        enqueueSnackbar("Aucun changement effectué", {
+          variant: "info",
+        });
       setDisabledId("");
     }
   };
@@ -147,7 +159,6 @@ const Admin: React.FC = () => {
           <S.TextFieldContainer>
             <TextField
               variant="standard"
-              id={item?.id.toString()}
               type="text"
               fullWidth
               name="email"
@@ -156,7 +167,22 @@ const Admin: React.FC = () => {
               onChange={(e) => onInputChange(e, item?.id)}
             />
           </S.TextFieldContainer>
-          <div>{item?.api_key}</div>
+          <S.TextFieldContainer>
+            {item?.api_key === AdminAPIKey ? (
+              ""
+            ) : (
+              <TextField
+                variant="standard"
+                type="text"
+                fullWidth
+                name="api_key"
+                value={editedData[item.id]?.api_key || item?.api_key}
+                disabled={disabledId === item?.id.toString() ? false : true}
+                onChange={(e) => onInputChange(e, item?.id)}
+              />
+            )}
+          </S.TextFieldContainer>
+
           <div>
             <Button onClick={() => handlePut(item?.id.toString())}>
               Modifier

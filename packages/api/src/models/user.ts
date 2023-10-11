@@ -59,9 +59,12 @@ export const putUserById = async (id: string, data: User) => {
     return null;
   }
 
-  const results = await knex<User>(table).update(updatedFields).where({ id });
+  const results = await knex<User>(table)
+    .update(updatedFields)
+    .where({ id })
+    .returning("id");
 
-  if (results) return results;
+  if (results) return results[0];
 
   return null;
 };

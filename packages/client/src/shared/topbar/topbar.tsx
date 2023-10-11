@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
@@ -84,7 +84,7 @@ const TopBar: React.FC = () => {
         fontSize="13vw"
         sx={{ my: 2, color: "secondary.main" }}
       >
-        TEST
+        SEALIFEAPI
       </Typography>
       <Divider />
       <List
@@ -155,7 +155,7 @@ const TopBar: React.FC = () => {
               display: { xs: "none", sm: "block" },
             }}
           >
-            TEST
+            SEALIFEAPI
           </Typography>
           <List sx={{ display: { xs: "none", sm: "flex" } }}>
             {menuItemsArray.map((item) => (
