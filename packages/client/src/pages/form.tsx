@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/system/Box";
 import TextField from "@mui/material/TextField";
@@ -14,7 +14,7 @@ import { Validate, ValidationGroup } from "mui-validate";
 import axios from "../axios";
 import { useSnackbar } from "notistack";
 import { AdminAPIKey } from "../config";
-
+// import { useAuth } from "react-auth-verification-context";
 import * as S from "../pages/form.styled";
 
 interface User {
@@ -26,6 +26,7 @@ interface User {
 
 const FormConnexion: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  // const { isAuthenticated, login, logout } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const userIdCourant = localStorage.getItem("usrCourant");
@@ -41,6 +42,10 @@ const FormConnexion: React.FC = () => {
   const [isInscrit, setIsInscrit] = useState(
     userIdCourant !== "" && userIdCourant !== undefined
   );
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -100,7 +105,6 @@ const FormConnexion: React.FC = () => {
 
   useEffect(() => {
     if (userdata) {
-      console.log(userdata);
       setIsInscrit(true);
       setUserAPIKey(userdata.api_key.toString());
       localStorage.setItem("usrCourant", userdata.id.toString());
@@ -120,6 +124,22 @@ const FormConnexion: React.FC = () => {
         });
     }
   };
+
+  // const getUser = async () => {
+  //   if (isAuthenticated) {
+  //     localStorage.setItem("usrCourant", "");
+  //     setIsInscrit(false);
+
+  //     // logout();
+  //   } else {
+  //     console.log(validationEmail.valid);
+  //     if (validationEmail.valid) fetchGet();
+  //     else
+  //       enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
+  //         variant: "error",
+  //       });
+  //   }
+  // };
 
   const fetchPost = async () => {
     const params = {
@@ -313,6 +333,7 @@ const FormConnexion: React.FC = () => {
                       onClick={() => getUser()}
                     >
                       {isInscrit ? "LOG OUT" : "LOG IN"}
+                      {/* {isAuthenticated ? "LOG OUT" : "LOG IN"} */}
                     </S.ButtonLogin>
                     <S.ButtonLogin
                       isinscrit={isInscrit}
