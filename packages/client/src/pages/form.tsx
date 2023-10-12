@@ -14,7 +14,8 @@ import { Validate, ValidationGroup } from "mui-validate";
 import axios from "../axios";
 import { useSnackbar } from "notistack";
 import { AdminAPIKey } from "../config";
-// import { useAuth } from "react-auth-verification-context";
+import Spinner from "../shared/spinner/spinner";
+
 import * as S from "../pages/form.styled";
 
 interface User {
@@ -38,14 +39,15 @@ const FormConnexion: React.FC = () => {
   });
   const [userAPIKey, setUserAPIKey] = useState("");
   const isAdmin = userAPIKey === AdminAPIKey;
+  const [isLoading, setisLoadind] = useState(false);
 
   const [isInscrit, setIsInscrit] = useState(
     userIdCourant !== "" && userIdCourant !== undefined
   );
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
+  // const refreshPage = () => {
+  //   window.location.reload();
+  // };
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -61,7 +63,7 @@ const FormConnexion: React.FC = () => {
   }); // information form
 
   const { email, password, api_key } = user;
-  console.log(user);
+
   const onInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -116,30 +118,19 @@ const FormConnexion: React.FC = () => {
       localStorage.setItem("usrCourant", "");
       setIsInscrit(false);
     } else {
-      console.log(validationEmail.valid);
-      if (validationEmail.valid) fetchGet();
-      else
+      if (validationEmail.valid) {
+        console.log("avant");
+        setisLoadind(true);
+        setTimeout(() => {
+          fetchGet();
+          setisLoadind(false);
+        }, 2000);
+      } else
         enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
           variant: "error",
         });
     }
   };
-
-  // const getUser = async () => {
-  //   if (isAuthenticated) {
-  //     localStorage.setItem("usrCourant", "");
-  //     setIsInscrit(false);
-
-  //     // logout();
-  //   } else {
-  //     console.log(validationEmail.valid);
-  //     if (validationEmail.valid) fetchGet();
-  //     else
-  //       enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
-  //         variant: "error",
-  //       });
-  //   }
-  // };
 
   const fetchPost = async () => {
     const params = {
@@ -313,11 +304,16 @@ const FormConnexion: React.FC = () => {
                       </FormControl>
                     </Box>
                   </S.InputContainer>
-                  <S.UserData isinscrit={isInscrit}>
-                    USER: {userdata?.email}
-                    <br />
-                    {isAdmin ? "" : `API-KEY: ${userdata?.api_key}`}
-                  </S.UserData>
+                  {!isLoading ? (
+                    <S.UserData isinscrit={isInscrit}>
+                      USER: {userdata?.email}
+                      <br />
+                      {isAdmin ? "" : `API-KEY: ${userdata?.api_key}`}
+                    </S.UserData>
+                  ) : (
+                    <Spinner />
+                  )}
+
                   <ButtonGroup
                     disableElevation
                     variant="contained"
@@ -333,7 +329,6 @@ const FormConnexion: React.FC = () => {
                       onClick={() => getUser()}
                     >
                       {isInscrit ? "LOG OUT" : "LOG IN"}
-                      {/* {isAuthenticated ? "LOG OUT" : "LOG IN"} */}
                     </S.ButtonLogin>
                     <S.ButtonLogin
                       isinscrit={isInscrit}

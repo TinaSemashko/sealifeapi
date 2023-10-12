@@ -12,7 +12,6 @@ import NotFound from "../pages/notFound";
 const Home = lazy(() => import("../pages/home"));
 const Example = lazy(() => import("../pages/example"));
 const Apirest = lazy(() => import("../pages/apirest"));
-// const Connection = lazy(() => import("../pages/connection"));
 const Form = lazy(() => import("../pages/form"));
 const Admin = lazy(() => import("../pages/admin"));
 
@@ -22,7 +21,6 @@ export const AppRoutes: React.FunctionComponent = () => (
     <Route path={Routes.example} element={withSuspense(Example)} />
     <Route path={Routes.apirest} element={withSuspense(Apirest)} />
     <Route path={Routes.form} element={withSuspense(Form)} />
-    {/* <Route path={Routes.deconnection} element={withSuspense(Connection)} />*/}
     <Route path={Routes.admin} element={withSuspense(Admin)} />
     <Route path="*" element={<NotFound />} />
   </Router>
