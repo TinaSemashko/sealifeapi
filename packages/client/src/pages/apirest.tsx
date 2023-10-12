@@ -6,6 +6,10 @@ import axios from "../axios";
 import {
   APIURL_GET_ALL_BATEAUX,
   APIURL_GET_BATEAUX_BY_MODEL_OR_TYPE,
+  APIURL_GET_ALL_REVIEWS,
+  APIURL_POST_REVIEW,
+  APIURL_DELETE_REVIEW,
+  APIURL_GET_REVIEW_BY_MODEL,
 } from "../constants/apiurls";
 
 import * as S from "./apirest.styled";
@@ -24,6 +28,26 @@ const Apirest: React.FC = () => {
     const fetchGet = async () => {
     await axios
     .get(APIUrl)
+    .then(response => console.log(response))
+     .catch((error) => console.error(error);
+     );
+   };
+        `;
+
+  const RequestPost = `
+    const fetchPost = async () => {
+    await axios
+    .post(APIUrl)
+    .then(response => console.log(response))
+     .catch((error) => console.error(error);
+     );
+   };
+        `;
+
+  const RequestDelete = `
+    const fetchDelete = async () => {
+    await axios
+    .delete(APIUrl)
     .then(response => console.log(response))
      .catch((error) => console.error(error);
      );
@@ -78,7 +102,7 @@ const Apirest: React.FC = () => {
       </S.ApiFuncItem>
       <S.ApiListItem>
         <Typography variant="h4">GET Reviews</Typography>
-        <Typography variant="h6">{}</Typography>
+        <Typography variant="h6">{APIURL_GET_ALL_REVIEWS}</Typography>
       </S.ApiListItem>
       <S.ApiFuncItem>
         <SyntaxHighlighter language="javascript" style={agate}>
@@ -87,11 +111,29 @@ const Apirest: React.FC = () => {
       </S.ApiFuncItem>
       <S.ApiListItem>
         <Typography variant="h4">GET Reviews by model</Typography>
-        <Typography variant="h6">{}</Typography>
+        <Typography variant="h6">{APIURL_GET_REVIEW_BY_MODEL}</Typography>
       </S.ApiListItem>
       <S.ApiFuncItem>
         <SyntaxHighlighter language="javascript" style={agate}>
           {RequestGet}
+        </SyntaxHighlighter>
+      </S.ApiFuncItem>
+      <S.ApiListItem>
+        <Typography variant="h4">SET Review</Typography>
+        <Typography variant="h6">{APIURL_POST_REVIEW}</Typography>
+      </S.ApiListItem>
+      <S.ApiFuncItem>
+        <SyntaxHighlighter language="javascript" style={agate}>
+          {RequestPost}
+        </SyntaxHighlighter>
+      </S.ApiFuncItem>
+      <S.ApiListItem>
+        <Typography variant="h4">DELETE Review</Typography>
+        <Typography variant="h6">{APIURL_DELETE_REVIEW}</Typography>
+      </S.ApiListItem>
+      <S.ApiFuncItem>
+        <SyntaxHighlighter language="javascript" style={agate}>
+          {RequestDelete}
         </SyntaxHighlighter>
       </S.ApiFuncItem>
     </S.MainContainer>

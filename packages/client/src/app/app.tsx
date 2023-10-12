@@ -77,13 +77,15 @@ theme = responsiveFontSizes(theme);
 const App: React.FC = () => {
   const { user, login, logout } = useAuth();
 
-  return(
-  <ThemeProvider theme={responsiveFontSizes(theme)}>
-    <Topbar />
-    <SnackbarProvider>
-      <AppRoutes />
-    </SnackbarProvider>
-    <Footer />
-  </ThemeProvider>);
-}
+  return (
+    <ThemeProvider theme={responsiveFontSizes(theme)}>
+      <Topbar />
+
+      <SnackbarProvider>
+        <AppRoutes />
+      </SnackbarProvider>
+      <Footer />
+    </ThemeProvider>
+  );
+};
 export default App;

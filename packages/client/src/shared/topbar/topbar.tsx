@@ -166,6 +166,11 @@ const TopBar: React.FC = () => {
                   sx={{
                     color: "colorWhite.main",
                     textTransform: "capitalize",
+                    display:
+                      (isAdmin && MenuItemsMap[item] === MenuItemsMap.admin) ||
+                      MenuItemsMap[item] !== MenuItemsMap.admin
+                        ? "block"
+                        : "none",
                     "&.Mui-selected": {
                       color: "colorWhite.main",
                       backgroundColor: "secondary.main",
@@ -173,10 +178,7 @@ const TopBar: React.FC = () => {
                     },
                   }}
                 >
-                  {(isAdmin && MenuItemsMap[item] === MenuItemsMap.admin) ||
-                  MenuItemsMap[item] !== MenuItemsMap.admin
-                    ? MenuItemsMap[item]
-                    : ""}
+                  {MenuItemsMap[item]}
                 </ListItemButton>
               </ListItem>
             ))}

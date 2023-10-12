@@ -21,7 +21,6 @@ import authorization from "./src/middleware/authorisation";
 import authorizationAdmin from "./src/middleware/authorisation";
 
 const router = Router();
-// router.use(authorization);
 
 router.get("/user", getProfile(userModel));
 router.get("/users", authorizationAdmin, getAllUsers(userModel));
@@ -34,7 +33,7 @@ router.get("/bateaux", authorization, getALLBateaux(bateauModel));
 router.get("/bateauxbytype", authorization, getBateauByTypeModel(bateauModel));
 
 router.get("/reviews", authorization, getReviews(reviewModel));
-router.get("/getreviewsbyid", authorization, getReviewByModel(reviewModel));
+router.get("/getreviewsbymodel", authorization, getReviewByModel(reviewModel));
 router.post("/createreview", authorization, createNewReview(reviewModel));
 router.delete("/deletereviw", authorization, removeReviewById(reviewModel));
 
