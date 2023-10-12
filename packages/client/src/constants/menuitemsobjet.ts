@@ -7,7 +7,6 @@ type ItemsMap = {
 export const MenuItemsMap: ItemsMap = {
   [MenuItems.APIREST]: "API REST",
   [MenuItems.CONNECTION]: "Connexion",
-  [MenuItems.EXAMPLE]: "Exemple",
   [MenuItems.HOME]: "Accueil",
   [MenuItems.ADMIN]: "Admin page",
 };

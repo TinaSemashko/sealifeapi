@@ -45,9 +45,9 @@ const FormConnexion: React.FC = () => {
     userIdCourant !== "" && userIdCourant !== undefined
   );
 
-  // const refreshPage = () => {
-  //   window.location.reload();
-  // };
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -117,9 +117,9 @@ const FormConnexion: React.FC = () => {
     if (isInscrit) {
       localStorage.setItem("usrCourant", "");
       setIsInscrit(false);
+      refreshPage();
     } else {
       if (validationEmail.valid) {
-        console.log("avant");
         setisLoadind(true);
         setTimeout(() => {
           fetchGet();
