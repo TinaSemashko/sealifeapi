@@ -40,3 +40,9 @@ export const TextFieldContainer = styled("div")`
   @media (max-width: 750px) {
   }
 `;
+
+export const Admin = styled("div")<{ show: boolean }>`
+  display: ${({ show }) => (show ? "block" : "none")};
+  @media (max-width: 750px) {
+  }
+`;

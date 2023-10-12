@@ -19,7 +19,9 @@ const Admin: React.FC = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [userdata, setUserdata] = useState<User[]>([]);
+  const [admindata, setAdmindata] = useState<User>();
   const [disabledId, setDisabledId] = useState("");
+  const [show, setShow] = useState(false);
   const [editedData, setEditedData] = useState<{
     [key: string]: { email: string; api_key: string };
   }>({});
@@ -137,9 +139,54 @@ const Admin: React.FC = () => {
     navigate(Routes.form);
   };
 
+  const fetchGetAdmin = async () => {
+    const headers = {
+      params: {
+        api_key: AdminAPIKey,
+      },
+    };
+    await axios
+      .get(`me`, headers)
+      .then((response) => {
+        setAdmindata(response.data.results[0] as User);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const showAdmin = async () => {
+    if (!show) {
+      setShow(true);
+      fetchGetAdmin();
+    } else {
+      setShow(false);
+    }
+  };
+
   return (
     <S.MainContainer>
       <Typography variant="h3">Admin page</Typography>
+      <br />
+      <Button variant="contained" onClick={() => showAdmin()}>
+        Show admin
+      </Button>
+      <S.Admin show={show}>
+        <S.GridContainer>
+          <div>ID</div>
+          <div>EMAIL</div>
+          <div>APIKey</div>
+          <div>PASSWORD</div>
+          <div></div>
+        </S.GridContainer>
+        <S.GridContainer>
+          <div>{admindata?.id}</div>
+          <div>{admindata?.email}</div>
+          <div>{admindata?.api_key}</div>
+          <div>{admindata?.password}</div>
+        </S.GridContainer>
+      </S.Admin>
+      <br />
       <br />
       <Button variant="contained" onClick={() => addUser()}>
         Add user

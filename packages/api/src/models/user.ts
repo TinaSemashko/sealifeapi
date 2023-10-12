@@ -36,6 +36,16 @@ export const getUserById = async (id: string) => {
   return null;
 };
 
+export const getAdmin = async (api_key: string) => {
+  const results = await knex<User>(table).select("*").where({ api_key });
+
+  if (results && results.length) {
+    return results[0];
+  }
+
+  return null;
+};
+
 export const putUserById = async (id: string, data: User) => {
   const existingUser = await knex<User>(table)
     .select("*")

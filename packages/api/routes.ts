@@ -6,6 +6,7 @@ import {
   createNewUser,
   updateUserById,
   removeUser,
+  getAdmin,
 } from "./src/controllers/user";
 import * as userModel from "./src/models/user";
 import { getALLBateaux, getBateauByTypeModel } from "./src/controllers/bateau";
@@ -28,6 +29,7 @@ router.get("/getuserbyid", getUserById(userModel));
 router.post("/create", createNewUser(userModel));
 router.put("/update", authorizationAdmin, updateUserById(userModel));
 router.delete("/delete", authorizationAdmin, removeUser(userModel));
+router.get("/me", authorizationAdmin, getAdmin(userModel));
 
 router.get("/bateaux", authorization, getALLBateaux(bateauModel));
 router.get("/bateauxbytype", authorization, getBateauByTypeModel(bateauModel));
