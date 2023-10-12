@@ -40,6 +40,19 @@ export const getUserById =
     res.send({ results: [user] });
   };
 
+export const getAdmin =
+  (model: User) => async (req: Request, res: Response) => {
+    const { api_key } = req.query;
+
+    const user = await model.getAdmin(api_key as string);
+
+    if (!user) {
+      return res.status(404).send({ message: "User doesn't existe" });
+    }
+
+    res.send({ results: [user] });
+  };
+
 export const updateUserById =
   (model: User) => async (req: Request, res: Response) => {
     const { id } = req.query;
