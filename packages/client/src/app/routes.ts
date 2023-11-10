@@ -3,4 +3,5 @@ export enum Routes {
   apirest = "/apirest",
   form = "/form",
   admin = "/admin",
+  example = "example"
 }

@@ -16,7 +16,7 @@ export const getALLBateaux =
 
 export const getBateauByModel =
   (model: Bateau) => async (req: Request, res: Response) => {
-    const { modelBateaux } = req.query;
+    const modelBateaux = req.query.data;
 
     const bateau = await model.getBateauByModel(modelBateaux as string);
 
@@ -27,14 +27,12 @@ export const getBateauByModel =
     res.send({ results: [bateau] });
   };
 
-export const getBateauByTypeModel =
+export const getBateauByType =
   (model: Bateau) => async (req: Request, res: Response) => {
-    const { id_type, ModelBateau } = req.query;
+    const type = req.query.data;
+    console.log(req.query);
 
-    const bateau = await model.getBateauByTypeModel(
-      id_type as string,
-      ModelBateau as string
-    );
+    const bateau = await model.getBateauByTypeModel(type as string);
 
     if (!bateau) {
       return res.status(404).send({ message: "No bateaux founded" });

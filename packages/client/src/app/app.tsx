@@ -1,11 +1,8 @@
 import { AppRoutes } from "./appRoutes";
-
 import Topbar from "../shared/topbar/topbar";
 import { ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import Footer from "../shared/footer/footer";
-import { AuthContext } from "../context/authContext";
-import { useAuth } from "../hooks/useAuth";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -75,12 +72,9 @@ export let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 const App: React.FC = () => {
-  const { user, login, logout } = useAuth();
-
   return (
     <ThemeProvider theme={responsiveFontSizes(theme)}>
       <Topbar />
-
       <SnackbarProvider>
         <AppRoutes />
       </SnackbarProvider>

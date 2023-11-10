@@ -9,7 +9,11 @@ import {
   getAdmin,
 } from "./src/controllers/user";
 import * as userModel from "./src/models/user";
-import { getALLBateaux, getBateauByTypeModel } from "./src/controllers/bateau";
+import {
+  getALLBateaux,
+  getBateauByModel,
+  getBateauByType,
+} from "./src/controllers/bateau";
 import * as bateauModel from "./src/models/bateau";
 import {
   getReviews,
@@ -32,7 +36,8 @@ router.delete("/delete", authorizationAdmin, removeUser(userModel));
 router.get("/me", authorizationAdmin, getAdmin(userModel));
 
 router.get("/bateaux", authorization, getALLBateaux(bateauModel));
-router.get("/bateauxbytype", authorization, getBateauByTypeModel(bateauModel));
+router.get("/bateauxbytype", authorization, getBateauByType(bateauModel));
+router.get("/bateauxbymodel", authorization, getBateauByModel(bateauModel));
 
 router.get("/reviews", authorization, getReviews(reviewModel));
 router.get("/getreviewsbymodel", authorization, getReviewByModel(reviewModel));

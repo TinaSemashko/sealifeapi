@@ -27,7 +27,6 @@ interface User {
 
 const FormConnexion: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const { isAuthenticated, login, logout } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const userIdCourant = localStorage.getItem("usrCourant");
@@ -42,7 +41,7 @@ const FormConnexion: React.FC = () => {
   const [isLoading, setisLoadind] = useState(false);
 
   const [isInscrit, setIsInscrit] = useState(
-    userIdCourant !== "" && userIdCourant !== undefined
+    userIdCourant !== undefined && userIdCourant !== ""
   );
 
   const refreshPage = () => {

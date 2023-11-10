@@ -14,24 +14,44 @@ export const getBateaux = async () => {
 };
 
 export const getBateauByModel = async (model: string) => {
-  const results = await knex<Bateau>(table).select("*").where({ model });
+  const results = await knex<Bateau>(table)
+    .select(
+      knex.raw("ENCODE(photo, 'base64') as photo"),
+      "model",
+      "displacement",
+      "eng_power",
+      "length",
+      "id_type",
+      "price",
+      "speed_max",
+      "tankfuelcapacity"
+    )
+    //.where("model", "like", `%${model}%`);
+    .where({ model });
 
   if (results && results.length) {
-    return results[0];
+    return results;
   }
 
   return null;
 };
 
-export const getBateauByTypeModel = async (
-  id_type: string = "",
-  model: string = ""
-) => {
-  const query = knex<Bateau>(table).select("*");
-  if (id_type) {
+export const getBateauByTypeModel = async (type: string) => {
+  let id_type = 1;
+  if (type == "yacht") id_type = 2;
+  const query = knex<Bateau>(table).select(
+    knex.raw("ENCODE(photo, 'base64') as photo"),
+    "model",
+    "displacement",
+    "eng_power",
+    "length",
+    "id_type",
+    "price",
+    "speed_max",
+    "tankfuelcapacity"
+  );
+  if (type) {
     query.where("id_type", id_type);
-  } else if (model) {
-    query.where("model", "like", `%${model}%`);
   }
 
   const results = await query;

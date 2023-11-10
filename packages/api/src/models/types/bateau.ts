@@ -3,10 +3,10 @@ export type Bateau = {
   id: string;
   model: string;
   displacement: string;
-  speedMax: string;
+  speed_max: string;
   length: string;
-  tankFuelCapacity: string;
-  engPower: string;
+  tankfuelcapacity: string;
+  eng_power: string;
   id_type: string;
-  prix: string;
+  price: string;
 };
