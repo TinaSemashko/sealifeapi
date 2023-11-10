@@ -325,6 +325,9 @@ const FormConnexion: React.FC = () => {
                       isinscrit={isInscrit}
                       variant="contained"
                       size="medium"
+                      sx={{
+                        marginLeft: "-6vh",
+                      }}
                       onClick={() => getUser()}
                     >
                       {isInscrit ? "LOG OUT" : "LOG IN"}

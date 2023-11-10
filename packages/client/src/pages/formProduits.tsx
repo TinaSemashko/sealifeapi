@@ -36,7 +36,7 @@ const CardProduits: React.FC<Props> = ({ element }) => {
   return (
     <S.MainContainer
       sx={{
-        width: { xs: "90vw", md: "20vw" },
+        width: { xs: "90vw", md: "25vw" },
         height: { xs: "60vh", md: "100%" },
         backgroundColor:
           "linear-gradient(180deg, rgba(123,201,188,0.8548553210346639) 47%, rgba(16,86,83,1) 100%);",

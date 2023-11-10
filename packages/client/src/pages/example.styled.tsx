@@ -8,15 +8,27 @@ export const Cont = styled("div")`
   padding-top: 10%;
   color: ${({ theme }) => theme.palette.primary.main};
   text-align: center;
+
+  @media (max-width: 750px) {
+    padding-top: 15%;
+  }
 `;
 
 export const Search = styled("div")`
   text-align: center;
+
+  @media (max-width: 750px) {
+   display:flex;
+   justify-content:space-evenly;
+  }
 `;
 
 export const FlexContainer = styled("div")`
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
 `;
 
 export const GridContainer = styled("div")`

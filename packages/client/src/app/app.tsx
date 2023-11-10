@@ -26,7 +26,7 @@ export let theme = createTheme({
       main: "#2bb6b3",
     },
     secondary: {
-      main: "#daca3bff",
+      main: "#025e6a",
     },
     secondGreen: {
       main: "#1D5A43",
