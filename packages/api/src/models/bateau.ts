@@ -37,8 +37,9 @@ export const getBateauByModel = async (model: string) => {
 };
 
 export const getBateauByTypeModel = async (type: string) => {
-  let id_type = 1;
+  let id_type = 0;
   if (type == "yacht") id_type = 2;
+  if (type == "catamaran") id_type = 1;
   const query = knex<Bateau>(table).select(
     knex.raw("ENCODE(photo, 'base64') as photo"),
     "model",

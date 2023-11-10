@@ -7,6 +7,7 @@ import axios from "../axios";
 import * as S from "./example.styled";
 import { useEffect, useState } from "react";
 import CardProduits from "./formProduits";
+import { useSnackbar } from "notistack";
 
 interface Bateau {
   model: string;
@@ -21,6 +22,7 @@ interface Bateau {
 }
 
 const Example: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [bateaudata, setBateaudata] = useState<Bateau[]>([]);
   const [userAPIKey, setUserAPIKey] = useState("");
   const [search, setBateaux] = useState("");
@@ -62,14 +64,15 @@ const Example: React.FC = () => {
         setBateaudata(response.data.results[0] as Bateau[]);
       })
       .catch((err) => {
-        console.error(err);
+        enqueueSnackbar(err.message, {
+          variant: "error",
+        });
       });
   };
 
   const handleGetBateaux = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(event.target.value);
     setBateaux(event.target.value);
   };
 
@@ -80,6 +83,14 @@ const Example: React.FC = () => {
   const getBateauxParModel = () => {
     fetchGet("bateauxbymodel");
   };
+
+  useEffect(() => {
+    console.log(bateaudata);
+    if (!bateaudata)
+      enqueueSnackbar("Erreur", {
+        variant: "error",
+      });
+  }, [bateaudata]);
 
   return (
     <S.MainContainer>
