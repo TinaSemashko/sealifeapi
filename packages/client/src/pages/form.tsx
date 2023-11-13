@@ -40,7 +40,7 @@ const FormConnexion: React.FC = () => {
   const isAdmin = userAPIKey === AdminAPIKey;
   const [isLoading, setisLoadind] = useState(false);
 
-  const [isInscrit, setIsInscrit] = useState(
+  const [isInscrit, setIsInscrit] = useState<boolean>(
     userIdCourant !== undefined && userIdCourant !== ""
   );
 

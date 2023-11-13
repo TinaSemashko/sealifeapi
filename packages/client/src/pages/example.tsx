@@ -155,7 +155,7 @@ const Example: React.FC = () => {
           </S.Search>
         </S.FlexContainer>
         <S.GridContainer>
-          {bateaudata.slice(0, 15).map((item, index) => (
+          {bateaudata.map((item, index) => (
             <CardProduits key={index} element={item} />
           ))}
         </S.GridContainer>
