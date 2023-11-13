@@ -30,7 +30,6 @@ export const getBateauByModel =
 export const getBateauByType =
   (model: Bateau) => async (req: Request, res: Response) => {
     const type = req.query.data;
-    console.log(req.query);
 
     const bateau = await model.getBateauByTypeModel(type as string);
 

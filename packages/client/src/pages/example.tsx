@@ -28,6 +28,9 @@ const Example: React.FC = () => {
   const [search, setBateaux] = useState("");
   const userIdCourant = localStorage.getItem("usrCourant");
 
+  const APIUrlType = `http://localhost:4000/api/bateauxbytype?data=${search}&api_key=${userAPIKey}`;
+  const APIUrlModel = `http://localhost:4000/api/bateauxbymodel?data=${search}&api_key=${userAPIKey}`;
+
   const fetchGetUserById = async () => {
     const request = {
       params: {
@@ -52,14 +55,8 @@ const Example: React.FC = () => {
   }, [userIdCourant]);
 
   const fetchGet = async (endpoint: string) => {
-    const headers = {
-      params: {
-        data: search,
-        api_key: userAPIKey,
-      },
-    };
     await axios
-      .get(endpoint, headers)
+      .get(endpoint)
       .then((response) => {
         setBateaudata(response.data.results[0] as Bateau[]);
       })
@@ -77,11 +74,11 @@ const Example: React.FC = () => {
   };
 
   const getBateauxParType = () => {
-    fetchGet("bateauxbytype");
+    fetchGet(APIUrlType);
   };
 
   const getBateauxParModel = () => {
-    fetchGet("bateauxbymodel");
+    fetchGet(APIUrlModel);
   };
 
   useEffect(() => {
