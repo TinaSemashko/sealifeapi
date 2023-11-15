@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.js": "/static/js/main.5aa8d472.js",
+    "static/js/421.631d57e1.chunk.js": "/static/js/421.631d57e1.chunk.js",
+    "static/js/864.6347ee8c.chunk.js": "/static/js/864.6347ee8c.chunk.js",
+    "static/js/799.725745d9.chunk.js": "/static/js/799.725745d9.chunk.js",
+    "static/js/800.fbe20bc1.chunk.js": "/static/js/800.fbe20bc1.chunk.js",
+    "static/js/104.b77a2d0b.chunk.js": "/static/js/104.b77a2d0b.chunk.js",
+    "static/js/988.01eb6c4b.chunk.js": "/static/js/988.01eb6c4b.chunk.js",
+    "static/js/900.926aa297.chunk.js": "/static/js/900.926aa297.chunk.js",
+    "static/js/796.c9271ece.chunk.js": "/static/js/796.c9271ece.chunk.js",
+    "static/js/296.3f6974f3.chunk.js": "/static/js/296.3f6974f3.chunk.js",
+    "static/js/147.a501e8dc.chunk.js": "/static/js/147.a501e8dc.chunk.js",
+    "static/media/catamaranMovie.mp4": "/static/media/catamaranMovie.11376090eb6cb656e5e0.mp4",
+    "static/media/fon_admin.png": "/static/media/fon_admin.6f1e38ad3946e3a2670a.png",
+    "index.html": "/index.html",
+    "main.5aa8d472.js.map": "/static/js/main.5aa8d472.js.map",
+    "421.631d57e1.chunk.js.map": "/static/js/421.631d57e1.chunk.js.map",
+    "864.6347ee8c.chunk.js.map": "/static/js/864.6347ee8c.chunk.js.map",
+    "799.725745d9.chunk.js.map": "/static/js/799.725745d9.chunk.js.map",
+    "800.fbe20bc1.chunk.js.map": "/static/js/800.fbe20bc1.chunk.js.map",
+    "104.b77a2d0b.chunk.js.map": "/static/js/104.b77a2d0b.chunk.js.map",
+    "988.01eb6c4b.chunk.js.map": "/static/js/988.01eb6c4b.chunk.js.map",
+    "900.926aa297.chunk.js.map": "/static/js/900.926aa297.chunk.js.map",
+    "796.c9271ece.chunk.js.map": "/static/js/796.c9271ece.chunk.js.map",
+    "296.3f6974f3.chunk.js.map": "/static/js/296.3f6974f3.chunk.js.map",
+    "147.a501e8dc.chunk.js.map": "/static/js/147.a501e8dc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5aa8d472.js"
+  ]
+}
