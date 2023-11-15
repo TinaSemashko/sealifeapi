@@ -120,17 +120,17 @@ const Admin: React.FC = () => {
   const handlePut = (id: string) => {
     if (disabledId === "") setDisabledId(id);
     else {
-      // if (editedData.lenght) {
+      if (Object.keys(editedData).length) {
         setUser({
           ...user,
           email: editedData[id].email,
           api_key: editedData[id].api_key,
         });
         fetchPut(id);
-      // } else
-      //   enqueueSnackbar("Aucun changement effectué", {
-      //     variant: "info",
-      //   });
+      } else
+        enqueueSnackbar("Aucun changement effectué", {
+          variant: "info",
+        });
       setDisabledId("");
     }
   };
